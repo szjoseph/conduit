@@ -31,7 +31,7 @@ class TestConduit(object):
         cookie_panel = self.browser.find_elements_by_id('cookie-policy-panel')
         assert len(cookie_panel) == 0
 
-    TC02 - Regisztráció pozitív ágon, valid adatokkal.
+    # TC02 - Regisztráció pozitív ágon, valid adatokkal
     def test_registration(self):
         sign_up_btn = self.browser.find_element_by_xpath('//a[@href="#/register"]')
         sign_up_btn.click()
@@ -148,7 +148,7 @@ class TestConduit(object):
         update_successfull_msg = self.browser.find_element_by_xpath('//div[@class="swal-title"]')
         assert update_successfull_msg.text == "Update successful!"
 
-    # TC10 - Adat vagy adatok törlése - Komment létrehozása, majd törlése.
+    # TC10 - Adat vagy adatok törlése - Komment létrehozása, majd törlése
     def test_deleting_data(self):
         login(self.browser, t_user["email"], t_user["pwd"])
 
