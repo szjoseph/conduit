@@ -13,7 +13,7 @@ import csv
 class TestConduit(object):
     def setup(self):
         browser_options = Options()
-        # browser_options.headless = True
+        browser_options.headless = True
         self.browser = webdriver.Chrome(ChromeDriverManager().install(), options=browser_options)
         url = 'http://localhost:1667/'
         self.browser.get(url)
