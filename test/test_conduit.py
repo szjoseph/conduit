@@ -103,6 +103,7 @@ class TestConduit(object):
         new_article_btn = self.browser.find_element_by_xpath('//a[@href="#/editor"]')
         with open("test/article_data.csv", "r", encoding="UTF-8") as articles:
             a_table = csv.reader(articles, delimiter=";")
+            next(a_table)
             for row in a_table:
                 new_article_btn.click()
                 time.sleep(2)
