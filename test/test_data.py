@@ -2,8 +2,8 @@ import random
 import string
 
 t_user = {
-    "username": "testuser001",
-    "email": "testemail@gmail.com",
+    "username": "TesztElek",
+    "email": "tesztmaichal" + "gmail.com",
     "pwd": "Testpwd123",
     "profile-pic": "https://cdn.pixabay.com/photo/2016/09/25/23/25/stones-1694879_960_720.jpg"
 }
