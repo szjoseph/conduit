@@ -121,7 +121,7 @@ class TestConduit(object):
                 tag_input.send_keys(row[3])
                 time.sleep(2)
                 publish_article_btn.click()
-
+        time.sleep(2)
         user_profile = self.browser.find_elements_by_xpath('//a[@class="nav-link"]')[2]
         home_btn = self.browser.find_element_by_xpath('//a[@class="nav-link router-link-exact-active active"]')
         home_btn.click()
