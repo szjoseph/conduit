@@ -159,7 +159,7 @@ class TestConduit(object):
         post_comment_btn = self.browser.find_element_by_xpath('//button[@class="btn btn-sm btn-primary"]')
         textarea.send_keys(t_comment["comment"])
         post_comment_btn.click()
-        time.sleep(1)
+        time.sleep(2)
         delete_btn = self.browser.find_element_by_xpath('//i[@class="ion-trash-a"]')
         delete_btn.click()
         time.sleep(1)
