@@ -1,5 +1,5 @@
-- decreasing the number of sleeps
-- adding more comments
-- moving more functions to the functions file
-- uploading the presentation docs
-- translating the comments to english
+# decreasing the number of sleeps
+# adding more comments
+# moving more functions to the functions file
+# uploading the presentation docs
+# translating the comments to english
