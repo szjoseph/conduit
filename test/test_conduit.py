@@ -148,7 +148,7 @@ class TestConduit(object):
         update_successfull_msg = self.browser.find_element_by_xpath('//div[@class="swal-title"]')
         assert update_successfull_msg.text == "Update successful!"
 
-    # TC10 - Adat vagy adatok törlése - Komment létrehozása, majd törlése
+    # TC10 - Adat vagy adatok törlése - Komment létrehozása, majd törlése.
     def test_deleting_data(self):
         login(self.browser, t_user["email"], t_user["pwd"])
 
