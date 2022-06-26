@@ -100,7 +100,6 @@ class TestConduit(object):
         new_article_btn = self.browser.find_element_by_xpath('//a[@href="#/editor"]')
         with open("test/article_data.csv", "r", encoding="UTF-8") as articles:
             a_table = csv.reader(articles, delimiter=";")
-            # next(a_table)
             for row in a_table:
                 new_article_btn.click()
                 time.sleep(2)
@@ -159,7 +158,7 @@ class TestConduit(object):
         textarea.send_keys(t_comment["comment"])
         post_comment_btn.click()
         time.sleep(2)
-        delete_btn = self.browser.find_element_by_xpath('//i[@class="ion-trash-a"]')
+        delete_btn = self.browser.find_element_by_xpath('//span/i[@class="ion-trash-a"]')
         delete_btn.click()
         time.sleep(1)
         number_of_comments2 = len(self.browser.find_elements_by_xpath('//div[@class="card"]'))
