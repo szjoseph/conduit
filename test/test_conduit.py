@@ -148,25 +148,28 @@ class TestConduit(object):
         update_successfull_msg = self.browser.find_element_by_xpath('//div[@class="swal-title"]')
         assert update_successfull_msg.text == "Update successful!"
 
-    # TC10 - Adat vagy adatok törlése - Komment létrehozása, majd törlése
+    # TC10 - Adat vagy adatok törlése - Bejegyzés létrehozása, majd törlése
     def test_deleting_data(self):
         login(self.browser, t_user["email"], t_user["pwd"])
-
-        first_article = self.browser.find_elements_by_xpath('//a[@class="preview-link"]/h1')[0]
-        first_article.click()
-        time.sleep(1)
-        number_of_comments = len(self.browser.find_elements_by_xpath('//div[@class="card"]'))
-        textarea = self.browser.find_element_by_xpath('//textarea[@placeholder="Write a comment..."]')
-        post_comment_btn = self.browser.find_element_by_xpath('//button[@class="btn btn-sm btn-primary"]')
-        textarea.send_keys(t_comment["comment"])
-        post_comment_btn.click()
-        time.sleep(30)
-        delete_btn = WebDriverWait(self.browser, 30).until(ec.presence_of_element_located(
-            (By.XPATH, '//i[@class="ion-trash-a"]')))
-        delete_btn.click()
-        time.sleep(30)
-        number_of_comments2 = len(self.browser.find_elements_by_xpath('//div[@class="card"]'))
-        assert number_of_comments == number_of_comments2
+        new_article_btn = self.browser.find_element_by_xpath('//a[@href="#/editor"]')
+        new_article_btn.click()
+        time.sleep(2)
+        title_input = self.browser.find_element_by_xpath('//*[@placeholder="Article Title"]')
+        about_input = self.browser.find_element_by_xpath(
+            '//*[@id="app"]/div/div/div/div/form/fieldset/fieldset[2]/input')
+        text_input = self.browser.find_element_by_xpath('//*[@placeholder="Write your article (in markdown)"]')
+        tag_input = self.browser.find_element_by_xpath('//*[@placeholder="Enter tags"]')
+        publish_article_btn = self.browser.find_element_by_xpath('//button[@type="submit"]')
+        title_input.send_keys("Abcd")
+        about_input.send_keys("Efgh")
+        text_input.send_keys("Jklm")
+        tag_input.send_keys("Nopq")
+        publish_article_btn.click()
+        time.sleep(2)
+        delete_article_btn = self.browser.find_element_by_xpath('//button[@class="btn btn-outline-danger btn-sm"]')
+        delete_article_btn.click()
+        assert WebDriverWait(self.browser, 3).until(ec.presence_of_element_located(
+            (By.XPATH, '//div[@class="swal-overlay"]')))
 
     # TC11 - Adatok lementése felületről - Saját cikkek címeinek lementése
     def test_saving_data(self):
