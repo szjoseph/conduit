@@ -1,6 +1,9 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
 import time
 from functions import login
 from test_data import t_user, t_comment
@@ -157,8 +160,9 @@ class TestConduit(object):
         post_comment_btn = self.browser.find_element_by_xpath('//button[@class="btn btn-sm btn-primary"]')
         textarea.send_keys(t_comment["comment"])
         post_comment_btn.click()
-        time.sleep(2)
-        delete_btn = self.browser.find_element_by_xpath('//span/i[@class="ion-trash-a"]')
+        time.sleep(1)  # nem működik nélküle
+        delete_btn = WebDriverWait(self.browser, 3).until(EC.presence_of_element_located(
+            (By.XPATH, '//span/i[@class="ion-trash-a"]')))
         delete_btn.click()
         time.sleep(1)
         number_of_comments2 = len(self.browser.find_elements_by_xpath('//div[@class="card"]'))
