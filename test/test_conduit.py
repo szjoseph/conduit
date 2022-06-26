@@ -160,7 +160,7 @@ class TestConduit(object):
         post_comment_btn = self.browser.find_element_by_xpath('//button[@class="btn btn-sm btn-primary"]')
         textarea.send_keys(t_comment["comment"])
         post_comment_btn.click()
-        # time.sleep(1)  # nem működik nélküle
+        time.sleep(1)  # nem működik nélküle
         delete_btn = WebDriverWait(self.browser, 30).until(ec.presence_of_element_located(
             (By.XPATH, '//i[@class="ion-trash-a"]')))
         delete_btn.click()
