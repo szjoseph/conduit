@@ -119,11 +119,12 @@ class TestConduit(object):
                 text_input.send_keys(row[2])
                 tag_input.clear()
                 tag_input.send_keys(row[3])
-                time.sleep(2)
+                time.sleep(1)
                 publish_article_btn.click()
-        # time.sleep(2)
-        home_btn = self.browser.find_elements_by_xpath('//a[@class="nav-link"]')[3]
-        home_btn.click()
+        profile_btn = self.browser.find_elements_by_xpath('//li/a[@class="nav-link"]')[2]
+        profile_btn.click()
+        time.sleep(2)
+        self.browser.refresh()
         time.sleep(2)
         own_articles = self.browser.find_elements_by_xpath('//div[@class="article-preview"]')
         assert len(own_articles) == 5
