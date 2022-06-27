@@ -117,9 +117,9 @@ class TestConduit(object):
                 publish_article_btn.click()
         profile_btn = self.browser.find_elements_by_xpath('//li/a[@class="nav-link"]')[2]
         profile_btn.click()
-        time.sleep(2)
+        time.sleep(3)
         self.browser.refresh()
-        time.sleep(2)
+        time.sleep(3)
         own_articles = self.browser.find_elements_by_xpath('//a[@class="preview-link"]')
         assert len(own_articles) == 5
 
