@@ -129,7 +129,7 @@ class TestConduit(object):
         time.sleep(2)
         self.browser.refresh()
         time.sleep(2)
-        own_articles = self.browser.find_elements_by_xpath('//div[@class="article-preview"]')
+        own_articles = self.browser.find_elements_by_xpath('//a[@class="preview-link"]')
         assert len(own_articles) == 5
 
     # TC09 - Meglévő adat módosítás - Felhasználónév megváltoztatása
