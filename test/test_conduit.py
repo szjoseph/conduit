@@ -45,9 +45,9 @@ class TestConduit(object):
         password.send_keys(t_user["pwd"])
         sign_up_submit.click()
 
-        time.sleep(3)
-        reg_msg = self.browser.find_element_by_xpath('//div[@class="swal-text"]')  # successful registration message
-        assert reg_msg.text == "Your registration was successful!"
+        time.sleep(6)
+        assert self.browser.find_element_by_xpath('//div[@class="swal-icon swal-icon--success"]').is_displayed()  # successful registration message
+
 
     # TC03 - Bejelentkezés
     def test_login(self):
