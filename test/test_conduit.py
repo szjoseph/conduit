@@ -46,8 +46,8 @@ class TestConduit(object):
         sign_up_submit.click()
 
         time.sleep(6)
-        assert self.browser.find_element_by_xpath('//div[@class="swal-icon swal-icon--success"]').is_displayed()  # successful registration message
-
+        assert self.browser.find_element_by_xpath(
+            '//div[@class="swal-icon swal-icon--success"]').is_displayed()  # successful registration message
 
     # TC03 - Bejelentkezés
     def test_login(self):
@@ -113,15 +113,10 @@ class TestConduit(object):
                 text_input.send_keys(row[2])
                 tag_input.clear()
                 tag_input.send_keys(row[3])
-                time.sleep(1)
                 publish_article_btn.click()
-        profile_btn = self.browser.find_elements_by_xpath('//li/a[@class="nav-link"]')[2]
-        profile_btn.click()
-        time.sleep(3)
-        self.browser.refresh()
-        time.sleep(3)
-        own_articles = self.browser.find_elements_by_xpath('//a[@class="preview-link"]')
-        assert len(own_articles) == 5
+                submitted_title = WebDriverWait(self.browser, 3).until(ec.presence_of_element_located(
+                    (By.XPATH, '//h1')))
+                assert submitted_title.text == row[0]
 
     # TC08 - Adat vagy adatok törlése - Bejegyzés létrehozása, majd törlése
     def test_deleting_data(self):
