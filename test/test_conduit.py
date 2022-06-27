@@ -62,16 +62,7 @@ class TestConduit(object):
         logout_btn.click()
         assert self.browser.find_element_by_xpath('//a[@href="#/register"]').is_displayed()
 
-    # TC05 - Adatok listázása - Lorem taggel rendelkező cikkek listázása
-    def test_listing_data(self):
-        login(self.browser, t_user["email"], t_user["pwd"])
-        lorem_tag = self.browser.find_element_by_xpath('//a[@href="#/tag/lorem"]')
-        lorem_tag.click()
-        time.sleep(2)
-        articles_found = len(self.browser.find_elements_by_xpath('//a[@class="preview-link"]/h1'))
-        assert articles_found == 3
-
-    # TC06 - Több oldalas lista bejárása - Navigálás a 2. oldalra
+    # TC05 - Több oldalas lista bejárása - Navigálás a 2. oldalra
     def test_list_navigation(self):
         login(self.browser, t_user["email"], t_user["pwd"])
         page2_btn = self.browser.find_elements_by_xpath('//a[@class="page-link"]')[1]
@@ -80,7 +71,7 @@ class TestConduit(object):
         active_page = self.browser.find_element_by_xpath('//*[@class="page-item active"]')
         assert page2_btn.text == active_page.text
 
-    # TC07 - Új adat bevitel - Kommentelés
+    # TC06- Új adat bevitel - Kommentelés
     def test_add_comment(self):
         login(self.browser, t_user["email"], t_user["pwd"])
         first_article = self.browser.find_elements_by_xpath('//a[@class="preview-link"]/h1')[0]
@@ -96,7 +87,7 @@ class TestConduit(object):
         latest_comment = self.browser.find_elements_by_xpath('//p[@class="card-text"]')[0]
         assert latest_comment.text == t_comment["comment"]
 
-    # TC08 - Ismételt és sorozatos adatbevitel adatforrásból - Cikkek létrehozása
+    # TC07 - Ismételt és sorozatos adatbevitel adatforrásból - Cikkek létrehozása
     def test_post_new_articles(self):
         login(self.browser, t_user["email"], t_user["pwd"])
 
@@ -132,7 +123,7 @@ class TestConduit(object):
         own_articles = self.browser.find_elements_by_xpath('//a[@class="preview-link"]')
         assert len(own_articles) == 5
 
-    # TC09 - Meglévő adat módosítás - Felhasználónév megváltoztatása
+    # TC08 - Meglévő adat módosítás - Felhasználónév megváltoztatása
     def test_change_data(self):
         login(self.browser, t_user["email"], t_user["pwd"])
 
@@ -149,7 +140,7 @@ class TestConduit(object):
         update_successfull_msg = self.browser.find_element_by_xpath('//div[@class="swal-title"]')
         assert update_successfull_msg.text == "Update successful!"
 
-    # TC10 - Adat vagy adatok törlése - Bejegyzés létrehozása, majd törlése
+    # TC09 - Adat vagy adatok törlése - Bejegyzés létrehozása, majd törlése
     def test_deleting_data(self):
         login(self.browser, t_user["email"], t_user["pwd"])
         new_article_btn = self.browser.find_element_by_xpath('//a[@href="#/editor"]')
@@ -172,12 +163,13 @@ class TestConduit(object):
         assert WebDriverWait(self.browser, 3).until(ec.presence_of_element_located(
             (By.XPATH, '//div[@class="swal-overlay"]')))
 
-    # TC11 - Adatok lementése felületről - Saját cikkek címeinek lementése
+    # TC10 - Adatok lementése felületről - Saját cikkek címeinek lementése
     def test_saving_data(self):
         login(self.browser, t_user["email"], t_user["pwd"])
+        time.sleep(3)
         user_profile = self.browser.find_elements_by_xpath('//a[@class="nav-link"]')[2]
         user_profile.click()
-        time.sleep(1)
+        time.sleep(3)
         article_titles = self.browser.find_elements_by_xpath('//h1')
         with open('test/article_titles.txt', 'w', encoding='UTF-8') as collected_titles:
             for i in article_titles:
@@ -188,3 +180,12 @@ class TestConduit(object):
             saved_titles = collected_titles2.readlines()
 
         assert len(article_titles) == len(saved_titles)
+
+    # TC11 - Adatok listázása - Lorem taggel rendelkező cikkek listázása
+    def test_listing_data(self):
+        login(self.browser, t_user["email"], t_user["pwd"])
+        lorem_tag = self.browser.find_element_by_xpath('//a[@href="#/tag/lorem"]')
+        lorem_tag.click()
+        time.sleep(2)
+        articles_found = len(self.browser.find_elements_by_xpath('//a[@class="preview-link"]/h1'))
+        assert articles_found == 3
