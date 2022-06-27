@@ -123,24 +123,7 @@ class TestConduit(object):
         own_articles = self.browser.find_elements_by_xpath('//a[@class="preview-link"]')
         assert len(own_articles) == 5
 
-    # TC08 - Meglévő adat módosítás - Felhasználónév megváltoztatása
-    def test_change_data(self):
-        login(self.browser, t_user["email"], t_user["pwd"])
-
-        settings_btn = self.browser.find_element_by_xpath('//a[@href="#/settings"]')
-        settings_btn.click()
-        time.sleep(1)
-        username_input = self.browser.find_element_by_xpath('//input[@placeholder="Your username"]')
-        update_settings_btn = self.browser.find_element_by_xpath(
-            '//button[@class="btn btn-lg btn-primary pull-xs-right"]')
-        username_input.clear()
-        username_input.send_keys("NewUsername")
-        update_settings_btn.click()
-        time.sleep(2)
-        update_successfull_msg = self.browser.find_element_by_xpath('//div[@class="swal-title"]')
-        assert update_successfull_msg.text == "Update successful!"
-
-    # TC09 - Adat vagy adatok törlése - Bejegyzés létrehozása, majd törlése
+    # TC08 - Adat vagy adatok törlése - Bejegyzés létrehozása, majd törlése
     def test_deleting_data(self):
         login(self.browser, t_user["email"], t_user["pwd"])
         new_article_btn = self.browser.find_element_by_xpath('//a[@href="#/editor"]')
@@ -163,7 +146,7 @@ class TestConduit(object):
         assert WebDriverWait(self.browser, 3).until(ec.presence_of_element_located(
             (By.XPATH, '//div[@class="swal-overlay"]')))
 
-    # TC10 - Adatok lementése felületről - Saját cikkek címeinek lementése
+    # TC09 - Adatok lementése felületről - Saját cikkek címeinek lementése
     def test_saving_data(self):
         login(self.browser, t_user["email"], t_user["pwd"])
         time.sleep(3)
@@ -181,7 +164,7 @@ class TestConduit(object):
 
         assert len(article_titles) == len(saved_titles)
 
-    # TC11 - Adatok listázása - Lorem taggel rendelkező cikkek listázása
+    # TC10 - Adatok listázása - Lorem taggel rendelkező cikkek listázása
     def test_listing_data(self):
         login(self.browser, t_user["email"], t_user["pwd"])
         lorem_tag = self.browser.find_element_by_xpath('//a[@href="#/tag/lorem"]')
@@ -189,3 +172,20 @@ class TestConduit(object):
         time.sleep(2)
         articles_found = len(self.browser.find_elements_by_xpath('//a[@class="preview-link"]/h1'))
         assert articles_found == 3
+
+    # TC11 - Meglévő adat módosítás - Felhasználónév megváltoztatása
+    def test_change_data(self):
+        login(self.browser, t_user["email"], t_user["pwd"])
+
+        settings_btn = self.browser.find_element_by_xpath('//a[@href="#/settings"]')
+        settings_btn.click()
+        time.sleep(1)
+        username_input = self.browser.find_element_by_xpath('//input[@placeholder="Your username"]')
+        update_settings_btn = self.browser.find_element_by_xpath(
+            '//button[@class="btn btn-lg btn-primary pull-xs-right"]')
+        username_input.clear()
+        username_input.send_keys("NewUsername")
+        update_settings_btn.click()
+        time.sleep(2)
+        update_successfull_msg = self.browser.find_element_by_xpath('//div[@class="swal-title"]')
+        assert update_successfull_msg.text == "Update successful!"
