@@ -18,6 +18,8 @@ class TestConduit(object):
         url = 'http://localhost:1667/'
         self.browser.get(url)
         self.browser.maximize_window()
+        WebDriverWait(self.browser, 2).until(ec.presence_of_element_located(
+            (By.XPATH, '//h1[@class="logo-font"]')))
 
     def teardown(self):
         self.browser.quit()
